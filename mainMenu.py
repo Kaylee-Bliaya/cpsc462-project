@@ -7,7 +7,7 @@ from pygame import mixer
 screen_width = 1200 
 screen_height = 600 #+ bottom_panel
 
-def gameMenu():
+def gameMenu(BEEN_TO_MAP):
     pygame.init()
     FINAL_ENCOUNTER = 11
 
@@ -76,7 +76,7 @@ def gameMenu():
         #draw background
         draw_background()
 
-        if next_step == True:
+        if next_step == True or BEEN_TO_MAP == True:
             #check main
             if menu_state == "main":
                 if play_button.draw(screen):

@@ -35,10 +35,15 @@ def addLevel(currLevel, levelsPassed):
 SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 600
 
+# list to record what levels the player has passed
+levelsPassed = []
+
 # ============================================ gameMap() FUNCTION START ============================================
 
 def gameMap():
     pygame.init()
+
+    print(f"levels passed: {levelsPassed}")
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption('Path of Conquest - Map')
@@ -74,9 +79,6 @@ def gameMap():
     btn10 = button.Button(btn10_img, 1135, 102)
     menuBtn = button.Button(menuBtn_img, 0, 0)
     inventoryBtn = button.Button(inventoryBtn_img, 50, 0)
-
-    # list to record what levels the player has passed
-    levelsPassed = []
 
     run = True
     while run:
