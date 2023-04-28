@@ -1,6 +1,8 @@
 import pygame
 import button
 
+# ============================================ loadAndScaleImg FUNCTION START ============================================
+
 # function to load an image and scale it to fit the game screen
 def loadAndScaleImg(imgName, type):
     if type == 'map':
@@ -18,18 +20,33 @@ def loadAndScaleImg(imgName, type):
 
     return img
 
-# function to check if the previous level has been passed
-def checkIfLevelPassed(currLevel, levelsPassed):
-    if currLevel - 1 in levelsPassed:
-        return True
-    return False
+# ============================================ drawBlankButtons FUNCTION START ============================================
 
-# function to add the passed level to a list called levelsPassed
-# if the level has been passed previously, don't add it to the list
-def addLevel(currLevel, levelsPassed):
-    if currLevel not in levelsPassed:
-        levelsPassed.append(currLevel)
-    return levelsPassed
+# function to draw blank level buttons to represent levels that are
+# not yet accessible to the player
+def drawBlankButtons(screen, blank):
+    screen.blit(blank, (154, 120))
+    screen.blit(blank, (200, 279))
+    screen.blit(blank, (320, 350))
+    screen.blit(blank, (500, 420))
+    screen.blit(blank, (750, 470))
+    screen.blit(blank, (870, 380))
+    screen.blit(blank, (1050, 335))
+    screen.blit(blank, (1108, 203))
+    screen.blit(blank, (1135, 102))
+
+# ============================================ drawLevelButtons FUNCTION START ============================================
+
+# function to draw the level buttons:
+#   check if the previous level has been passed
+#       if True, then draw the button for the next playable level
+#       and add the current level to levelsPassed
+def drawLevelButtons(screen, btn, levelsPassed, currLevel):
+    if currLevel - 1 in levelsPassed or currLevel == 1:
+        if btn.draw(screen):
+            print(f"level {currLevel}")
+            if currLevel not in levelsPassed:
+                levelsPassed.append(currLevel)
 
 # set the screen width and height
 SCREEN_WIDTH = 1200
@@ -38,12 +55,10 @@ SCREEN_HEIGHT = 600
 # list to record what levels the player has passed
 levelsPassed = []
 
-# ============================================ gameMap() FUNCTION START ============================================
+# ============================================ gameMap FUNCTION START ============================================
 
 def gameMap():
     pygame.init()
-
-    print(f"levels passed: {levelsPassed}")
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption('Path of Conquest - Map')
@@ -65,6 +80,7 @@ def gameMap():
     btn10_img = loadAndScaleImg('map_graphics/btn10.png', 'btn')
     menuBtn_img = loadAndScaleImg('map_graphics/menu.png', 'menu')
     inventoryBtn_img = loadAndScaleImg('map_graphics/inventory.png', 'inventory')
+    blank = loadAndScaleImg('map_graphics/blankBtn.png', 'btn')
 
     # create button instances
     btn1 = button.Button(btn1_img, 35, 300)
@@ -99,39 +115,20 @@ def gameMap():
             print('go to inventory')
 
         # draw the level buttons
-        #   * if the level button is drawn and the previous level has been passed
-        #       allow the player to select the next level button
-        #   * when a level has been passed add the level to the list levelsPassed
-        if btn1.draw(screen):
-            print('level 1')
-            addLevel(1, levelsPassed)
-        if btn2.draw(screen) and checkIfLevelPassed(2, levelsPassed):
-            print('level 2')
-            addLevel(2, levelsPassed)
-        if btn3.draw(screen) and checkIfLevelPassed(3, levelsPassed):
-            print('level 3')
-            addLevel(3, levelsPassed)
-        if btn4.draw(screen) and checkIfLevelPassed(4, levelsPassed):
-            print('level 4')
-            addLevel(4, levelsPassed)
-        if btn5.draw(screen) and checkIfLevelPassed(5, levelsPassed):
-            print('level 5')
-            addLevel(5, levelsPassed)
-        if btn6.draw(screen) and checkIfLevelPassed(6, levelsPassed):
-            print('level 6')
-            addLevel(6, levelsPassed)
-        if btn7.draw(screen) and checkIfLevelPassed(7, levelsPassed):
-            print('level 7')
-            addLevel(7, levelsPassed)
-        if btn8.draw(screen) and checkIfLevelPassed(8, levelsPassed):
-            print('level 8')
-            addLevel(8, levelsPassed)
-        if btn9.draw(screen) and checkIfLevelPassed(9, levelsPassed):
-            print('level 9')
-            addLevel(9, levelsPassed)
-        if btn10.draw(screen) and checkIfLevelPassed(10, levelsPassed):
-            print('level 10')
-            addLevel(10, levelsPassed)
+        #   * draw the 1st level button and blank buttons for the other levels
+        #   * if the current level has been passed, reveal the button for the next
+        #       level and add the current level to the list levelsPassed
+        drawBlankButtons(screen, blank)
+        drawLevelButtons(screen, btn1, levelsPassed, 1)
+        drawLevelButtons(screen, btn2, levelsPassed, 2)
+        drawLevelButtons(screen, btn3, levelsPassed, 3)
+        drawLevelButtons(screen, btn4, levelsPassed, 4)
+        drawLevelButtons(screen, btn5, levelsPassed, 5)
+        drawLevelButtons(screen, btn6, levelsPassed, 6)
+        drawLevelButtons(screen, btn7, levelsPassed, 7)
+        drawLevelButtons(screen, btn8, levelsPassed, 8)
+        drawLevelButtons(screen, btn9, levelsPassed, 9)
+        drawLevelButtons(screen, btn10, levelsPassed, 10)
 
         pygame.display.update()
         clock.tick(60)
