@@ -13,8 +13,8 @@ def main():
         if scene == SCENE_MENU:
             scene = gameMenu(BEEN_TO_MAP)
         if scene == SCENE_MAP:
-            BEEN_TO_MAP = True
             scene = gameMap()
+            BEEN_TO_MAP = True
         if scene == "quit":
             pygame.quit()
             quit()
