@@ -45,11 +45,11 @@ def gameMenu(BEEN_TO_MAP):
     bar_image = pygame.image.load('images/bar.png').convert_alpha()
 
     #Button instances
-    play_button = button.Button(play_image, 440, 110)
-    settings_button = button.Button(settings_image, 440, 245)
-    exit_button = button.Button(exit_image, 440, 380)
+    play_button = button.Button(play_image, 510, 130)
+    settings_button = button.Button(settings_image, 510, 265)
+    exit_button = button.Button(exit_image, 510, 400)
     music_button = button.Button(music_image, 300, 220)
-    back_button = button.Button(back_image, 450, 375)
+    back_button = button.Button(back_image, 510, 375)
     decrease_button = button.Button(decrease_image, 460, 230)
     increase_button = button.Button(increase_image, 700, 230)
 
@@ -96,19 +96,15 @@ def gameMenu(BEEN_TO_MAP):
 
                 if decrease_button.draw(screen):
                     current_volume = mixer.music.get_volume()
-                    print(f"start decrease: {current_volume}")
                     if current_volume > 0.0:
                         mixer.music.set_volume(max(0.0, current_volume-0.2))
                         bar_x_offset -= 40
-                        print(f"after decrease: {current_volume}")
                     
                 if increase_button.draw(screen):
                     current_volume = mixer.music.get_volume()
-                    print(f"start increase: {current_volume}")
                     if current_volume < 1.0:
                         mixer.music.set_volume(min(1.0, current_volume+0.2))
                         bar_x_offset +=40
-                        print(f"after increase: {current_volume}")
 
                 if back_button.draw(screen):
                     menu_state = "main"
