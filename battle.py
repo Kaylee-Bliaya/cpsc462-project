@@ -5,8 +5,6 @@ import os
 
 os.chdir(RESOURCES_DIR)
 
-levelPassed = False
-
 class Battle:
     def __init__(self):
         self.game_width, self.game_height = LANDSCAPE_WIDTH, LANDSCAPE_HEIGHT
