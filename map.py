@@ -1,5 +1,6 @@
 import pygame
 import button
+from battle import *
 
 # ============================================ loadAndScaleImg FUNCTION START ============================================
 
@@ -44,8 +45,8 @@ def drawBlankButtons(screen, blank):
 def drawLevelButtons(screen, btn, levelsPassed, currLevel):
     if currLevel - 1 in levelsPassed or currLevel == 1:
         if btn.draw(screen):
-            print(f"level {currLevel}")
-            if currLevel not in levelsPassed:
+            levelPassed = gamePlay()
+            if (currLevel not in levelsPassed) and levelPassed == "won":
                 levelsPassed.append(currLevel)
 
 # set the screen width and height
