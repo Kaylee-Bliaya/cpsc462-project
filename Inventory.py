@@ -1,39 +1,48 @@
 import pygame
-import random
+# import random
 
-pygame.init()
+def loadAndScaleImg(imgName, itemNum):
+    imgScale = 10
+    img = pygame.image.load(imgName)
 
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
+    imgWidth = img.get_rect().width
+    imgHeight = img.get_rect().height
+    img = pygame.transform.scale(img, (imgWidth/imgScale, imgHeight/imgScale))
 
-size = (400, 400)
-screen = pygame.display.set_mode(size)
-pygame.display.set_caption("Inventory")
-font = pygame.font.SysFont(None, 30)
+    inventory[itemNum] = img
 
-inventory = []
+images = ["archer-card.png", "knight-card.png", "necromancer-card.png", "pikeman-card.png", "rogue-card.png", "swordmaster-card.png"]
+inventory = {}
 
-items = ["Sword", "Shield", "Potion", "Firestick"]
+def gameInventory():
+    pygame.init()
+    pygame.display.set_caption("Inventory")
+    font = pygame.font.SysFont(None, 30)
 
-done = False
-clock = pygame.time.Clock()
+    SCREEN_WIDTH = 1200
+    SCREEN_HEIGHT = 600
 
-while not done:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            done = True
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                item = random.choice(items)
-                inventory.append(item)
+    pygame.init()
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-    screen.fill(WHITE)
+    clock = pygame.time.Clock()
 
-    text = font.render("Inventory: " + ", ".join(inventory), True, BLACK)
-    screen.blit(text, [10, 10])
+    for i in range(0, 6):
+        itemName = "item" + str(i + 1)
+        loadAndScaleImg(images[i], itemName)
 
-    pygame.display.flip()
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
 
-    clock.tick(60)
+        screen.blit(inventory["item1"], (0, 0))
+        screen.blit(inventory["item2"], (250, 0))
+        screen.blit(inventory["item3"], (500, 0))
+        screen.blit(inventory["item4"], (0, 270))
+        screen.blit(inventory["item5"], (250, 270))
+        screen.blit(inventory["item6"], (500, 270))
 
-pygame.quit()
+        pygame.display.update()
+        clock.tick(60)

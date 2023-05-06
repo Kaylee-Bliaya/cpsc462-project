@@ -1,13 +1,14 @@
 # bg_music
 from mainMenu import *
 from map import *
+from Inventory import *
 from settings import *
 
 os.chdir(RESOURCES_DIR)
 
 SCENE_MENU = "menu"
 SCENE_MAP = "map"
-SCENE_PLAY = "play"
+SCENE_INVENTORY = "inventory"
 
 def main():
     scene = SCENE_MENU
@@ -19,6 +20,8 @@ def main():
         if scene == SCENE_MAP:
             scene = gameMap()
             BEEN_TO_MAP = True
+        if scene == SCENE_INVENTORY:
+            scene = gameInventory()
         if scene == "quit":
             pygame.quit()
             quit()

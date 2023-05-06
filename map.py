@@ -113,7 +113,7 @@ def gameMap():
             run = False
             return "menu"
         if inventoryBtn.draw(screen):
-            print('go to inventory')
+            return "inventory"
 
         # draw the level buttons
         #   * draw the 1st level button and blank buttons for the other levels
