@@ -1,4 +1,3 @@
-# bg_music
 from mainMenu import *
 from map import *
 from Inventory import *
