@@ -1,7 +1,8 @@
 from settings import*
 from sprites import*
-from button import*
+import button
 import os
+import sys
 
 os.chdir(RESOURCES_DIR)
 
@@ -29,9 +30,14 @@ class Battle:
 
 
 
-        # knight_card = pygame.image.load("knight-card.png").convert_alpha()
-        # self.knight_button = Button(200, 200, knight_card, 1)
-
+        self.knight_card = pygame.image.load("knight-card.png").convert_alpha()
+        self.knight_button = button.Button(self.knight_card,0,0,.08)
+        self.necromancer_card = pygame.image.load("necromancer-card.png").convert_alpha()
+        self.necromancer_button = button.Button(self.necromancer_card,200,0, 0.08)
+        self.swordmaster_card = pygame.image.load("swordmaster-card.png").convert_alpha()
+        self.swordmaster_button = button.Button(self.swordmaster_card, 400,0, 0.08)
+        self.archer_card = pygame.image.load("archer-card.png").convert_alpha()
+        self.archer_button = button.Button(self.archer_card, 600,0, 0.08)
         self.gold = 0
 
 
@@ -39,7 +45,7 @@ class Battle:
         
         self.enemy_morale = 100
         self.player_morale = 100
-        self.enemy_last_deployment_time = 0
+        self.enemy_last_deployed_time = 0
 
         self.background1 = Static(0, 0, "layers/bg1.png")
         self.background4 = Static(0, 0, "layers/bg2.png")
@@ -58,7 +64,16 @@ class Battle:
 
     def events(self):
         for event in pygame.event.get():
-            
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if self.knight_button.draw(self.screen):
+                    self.deploy_unit("left", "knight")
+                if self.necromancer_button.draw(self.screen):
+                    self.deploy_unit("left", "necromancer")
+                if self.archer_button.draw(self.screen):
+                    self.deploy_unit('left','archer')
+                if self.swordmaster_button.draw(self.screen):
+                    self.deploy_unit('left','swordmaster')
+                
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_a:
                     self.deploy_unit("left", "archer", )
@@ -67,19 +82,28 @@ class Battle:
                 if event.key == pygame.K_w:
                     self.deploy_unit("left", "knight")
 
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit(1)
+
 
         
 
     def update(self):
         now = pygame.time.get_ticks()
         self.all_sprites.update()
-        # self.knight_button.draw(self.screen)
+        self.knight_button.draw(self.screen)
         if self.player_morale <= 0:
             self.player_morale = 0
             self.show_game_over_screen()
         elif self.enemy_morale <=0:
             self.enemy_morale = 0
             self.show_game_over_screen(True)
+        
+        if now - self.enemy_last_deployed_time >= 2500:
+            self.gold += 500
+            self.enemy_last_deployed_time = now
+            self.deploy_unit("right", "knight", 1)
 
 
     def show_game_over_screen(self, won=False):
@@ -124,6 +148,21 @@ class Battle:
         if self.playing:
             self.screen.fill(BLACK)
             self.all_sprites.draw(self.screen)
+            self.knight_button.draw(self.screen)
+            self.necromancer_button.draw(self.screen)
+            self.swordmaster_button.draw(self.screen)
+            self.archer_button.draw(self.screen)
+
+
+            font= pygame.font.Font('freesansbold.ttf',32)
+            self.my_morale = font.render("My Morale: " + str(self.player_morale), True, GREEN)
+            self.screen.blit(self.my_morale, (800,50))
+            self.e_morale = font.render("Enemy Morale: " + str(self.enemy_morale), True, RED)
+            self.screen.blit(self.e_morale, (800,100))
+
+            gold = font.render("Gold: " + str(self.gold), True, (255,215,0))
+            self.screen.blit(gold, (800,150))
+
             pygame.display.flip()
 
     def run(self):
@@ -144,6 +183,12 @@ class Battle:
                 unit = Knight_Infantry(self, 5, self.game_height-80, "Melee", unit_type, self.player_team, side, slot)
             elif unit_type == 'archer':
                 unit = Archer_Ranged(self, 5, self.game_height-80, "Ranged", unit_type, self.player_team, side, slot)
+            elif unit_type == 'swordmaster':
+                unit = Sword_Master(self, 5, self.game_height-80, "Melee", unit_type, self.player_team, side, slot)
+            elif unit_type == 'necromancer':
+                unit = Necromancer_Ranged(self, 5, self.game_height-80, "Ranged", unit_type, self.player_team, side, slot)
+
+
 
             self.player_unit_sprites.add(unit)
         else:
@@ -151,6 +196,7 @@ class Battle:
             self.enemy_unit_sprites.add(unit)
         self.all_sprites.add(unit)
             
+
 
 
 def gamePlay(scene):

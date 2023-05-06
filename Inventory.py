@@ -46,7 +46,7 @@ def gameInventory():
         screen.blit(inventory["item6"], (500, 270))
 
         back_image = pygame.image.load('images/back.png').convert_alpha()
-        back_button = button.Button(back_image, 1000, 50)
+        back_button = button.Button(back_image, 1000, 50, 1)
 
         if back_button.draw(screen):
             return "map"

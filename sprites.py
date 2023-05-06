@@ -184,15 +184,26 @@ class Knight_Infantry(Unit):
         def __init__(self, game, x, y, unit_class, unit_type, unit_team, side, slot):
             Unit.__init__(self, game, x, y, unit_class, unit_type, unit_team, side, slot, walk_frames = 8, attack_frames = 22, damage_frame = 11,
                            attacking_range=120, health = 100, attack = 25,
-                           defense = 1, walking_acc=6, walk_width= 96, attack_width= 144,height=64)
+                           defense = 1, walking_acc=2, walk_width= 96, attack_width= 144,height=64)
             
 class Archer_Ranged(Unit):
         def __init__(self, game, x, y, unit_class, unit_type, unit_team, side, slot):
             Unit.__init__(self, game, x, y, unit_class, unit_type, unit_team, side, slot, walk_frames = 8, attack_frames = 14, damage_frame = 13,
                            attacking_range=300, health = 50, attack = 15,
-                           defense = 1, walking_acc=5, walk_width= 128, attack_width= 180,height=128)
+                           defense = 1, walking_acc=1, walk_width= 128, attack_width= 180,height=128)
             
-
+class Sword_Master(Unit):
+        def __init__(self, game, x, y, unit_class, unit_type, unit_team, side, slot):
+            Unit.__init__(self, game, x, y, unit_class, unit_type, unit_team, side, slot, walk_frames = 8, attack_frames = 7, damage_frame = 5,
+                            attacking_range=120, health = 100, attack = 30,
+                            defense = 1, walking_acc=3, walk_width= 162, attack_width= 162,height=162)
+            
+class Necromancer_Ranged(Unit):
+        def __init__(self, game, x, y, unit_class, unit_type, unit_team, side, slot):
+            Unit.__init__(self, game, x, y, unit_class, unit_type, unit_team, side, slot, walk_frames = 10, attack_frames = 47, damage_frame = 40,
+                           attacking_range=150, health = 50, attack = 20,
+                           defense = 1, walking_acc=1, walk_width= 96, attack_width= 128,height=128)
+     
 class UnitHealthBar(pygame.sprite.Sprite):
     def __init__(self, x,y, filename, game, master, front = True):
         pygame.sprite.Sprite.__init__(self)

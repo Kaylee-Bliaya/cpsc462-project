@@ -88,18 +88,18 @@ def gameMap(wonOrLost, level):
     blank = loadAndScaleImg('map_graphics/blankBtn.png', 'btn')
 
     # create button instances
-    btn1 = button.Button(btn1_img, 35, 300)
-    btn2 = button.Button(btn2_img, 154, 120)
-    btn3 = button.Button(btn3_img, 200, 279)
-    btn4 = button.Button(btn4_img, 320, 350)
-    btn5 = button.Button(btn5_img, 500, 420)
-    btn6 = button.Button(btn6_img, 750, 470)
-    btn7 = button.Button(btn7_img, 870, 380)
-    btn8 = button.Button(btn8_img, 1050, 335)
-    btn9 = button.Button(btn9_img, 1108, 203)
-    btn10 = button.Button(btn10_img, 1135, 102)
-    menuBtn = button.Button(menuBtn_img, 0, 0)
-    inventoryBtn = button.Button(inventoryBtn_img, 50, 0)
+    btn1 = button.Button(btn1_img, 35, 300, 1)
+    btn2 = button.Button(btn2_img, 154, 120, 1)
+    btn3 = button.Button(btn3_img, 200, 279, 1)
+    btn4 = button.Button(btn4_img, 320, 350, 1)
+    btn5 = button.Button(btn5_img, 500, 420, 1)
+    btn6 = button.Button(btn6_img, 750, 470, 1)
+    btn7 = button.Button(btn7_img, 870, 380, 1)
+    btn8 = button.Button(btn8_img, 1050, 335, 1)
+    btn9 = button.Button(btn9_img, 1108, 203, 1)
+    btn10 = button.Button(btn10_img, 1135, 102, 1)
+    menuBtn = button.Button(menuBtn_img, 0, 0, 1)
+    inventoryBtn = button.Button(inventoryBtn_img, 50, 0, 1)
 
     run = True
     while run:

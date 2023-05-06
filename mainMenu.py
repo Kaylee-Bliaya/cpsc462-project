@@ -45,13 +45,13 @@ def gameMenu(BEEN_TO_MAP):
     bar_image = pygame.image.load('images/bar.png').convert_alpha()
 
     #Button instances
-    play_button = button.Button(play_image, 510, 130)
-    settings_button = button.Button(settings_image, 510, 265)
-    exit_button = button.Button(exit_image, 510, 400)
-    music_button = button.Button(music_image, 300, 220)
-    back_button = button.Button(back_image, 510, 375)
-    decrease_button = button.Button(decrease_image, 460, 230)
-    increase_button = button.Button(increase_image, 700, 230)
+    play_button = button.Button(play_image, 510, 130, 1)
+    settings_button = button.Button(settings_image, 510, 265, 1)
+    exit_button = button.Button(exit_image, 510, 400, 1)
+    music_button = button.Button(music_image, 300, 220, 1)
+    back_button = button.Button(back_image, 510, 375, 1)
+    decrease_button = button.Button(decrease_image, 460, 230, 1)
+    increase_button = button.Button(increase_image, 700, 230, 1)
 
     mixer.init()
     mixer.music.load('music/bg_music.mp3')
@@ -80,7 +80,6 @@ def gameMenu(BEEN_TO_MAP):
             #check main
             if menu_state == "main":
                 if play_button.draw(screen):
-                    from map import gameMap
                     return "map"    #connect to map
                 if settings_button.draw(screen):
                     menu_state = "settings"

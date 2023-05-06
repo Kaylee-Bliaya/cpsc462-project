@@ -1,7 +1,7 @@
 import os
 import tkinter as tk
 from PIL import Image, ImageTk
-from settings import *
+from settings2 import *
 
 def display_next_image():
     global current_image_index, image_label

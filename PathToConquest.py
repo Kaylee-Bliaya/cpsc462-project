@@ -4,7 +4,7 @@ from Inventory import *
 from settings import *
 import sys
 
-os.chdir(RESOURCES_DIR)
+# os.chdir(RESOURCES_DIR)
 
 SCENE_MENU = "menu"
 SCENE_MAP = "map"
