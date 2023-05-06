@@ -153,8 +153,8 @@ class Battle:
             
 
 
-def gamePlay():
+def gamePlay(scene):
     b = Battle()
     b.new()
     wonOrLost = b.run()
-    return wonOrLost
+    return (wonOrLost, scene)

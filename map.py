@@ -41,13 +41,16 @@ def drawBlankButtons(screen, blank):
 # function to draw the level buttons:
 #   check if the previous level has been passed
 #       if True, then draw the button for the next playable level
-#       and add the current level to levelsPassed
 def drawLevelButtons(screen, btn, levelsPassed, currLevel):
     if currLevel - 1 in levelsPassed or currLevel == 1:
-        if btn.draw(screen):
-            levelPassed = gamePlay()
-            if (currLevel not in levelsPassed) and levelPassed == "won":
-                levelsPassed.append(currLevel)
+        return btn.draw(screen)
+    
+# ============================================ addLevel FUNCTION START ============================================
+
+# function to add passed levels to the list levelsPassed
+def addLevel(levelsPassed, currLevel, levelPassed):
+    if (currLevel not in levelsPassed) and levelPassed == "won":
+        levelsPassed.append(currLevel)
 
 # set the screen width and height
 SCREEN_WIDTH = 1200
@@ -58,7 +61,7 @@ levelsPassed = []
 
 # ============================================ gameMap FUNCTION START ============================================
 
-def gameMap():
+def gameMap(wonOrLost, level):
     pygame.init()
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -115,21 +118,34 @@ def gameMap():
         if inventoryBtn.draw(screen):
             return "inventory"
 
+        addLevel(levelsPassed, level, wonOrLost)
+
         # draw the level buttons
         #   * draw the 1st level button and blank buttons for the other levels
         #   * if the current level has been passed, reveal the button for the next
         #       level and add the current level to the list levelsPassed
         drawBlankButtons(screen, blank)
-        drawLevelButtons(screen, btn1, levelsPassed, 1)
-        drawLevelButtons(screen, btn2, levelsPassed, 2)
-        drawLevelButtons(screen, btn3, levelsPassed, 3)
-        drawLevelButtons(screen, btn4, levelsPassed, 4)
-        drawLevelButtons(screen, btn5, levelsPassed, 5)
-        drawLevelButtons(screen, btn6, levelsPassed, 6)
-        drawLevelButtons(screen, btn7, levelsPassed, 7)
-        drawLevelButtons(screen, btn8, levelsPassed, 8)
-        drawLevelButtons(screen, btn9, levelsPassed, 9)
-        drawLevelButtons(screen, btn10, levelsPassed, 10)
+
+        if drawLevelButtons(screen, btn1, levelsPassed, 1):
+            return 1
+        if drawLevelButtons(screen, btn2, levelsPassed, 2):
+            return 2
+        if drawLevelButtons(screen, btn3, levelsPassed, 3):
+            return 3
+        if drawLevelButtons(screen, btn4, levelsPassed, 4):
+            return 4
+        if drawLevelButtons(screen, btn5, levelsPassed, 5):
+            return 5
+        if drawLevelButtons(screen, btn6, levelsPassed, 6):
+            return 6
+        if drawLevelButtons(screen, btn7, levelsPassed, 7):
+            return 7
+        if drawLevelButtons(screen, btn8, levelsPassed, 8):
+            return 8
+        if drawLevelButtons(screen, btn9, levelsPassed, 9):
+            return 9
+        if drawLevelButtons(screen, btn10, levelsPassed, 10):
+            return 10
 
         pygame.display.update()
         clock.tick(60)
