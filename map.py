@@ -1,6 +1,7 @@
 import pygame
 import button
 from battle import *
+import sys
 
 # ============================================ loadAndScaleImg FUNCTION START ============================================
 
@@ -106,7 +107,7 @@ def gameMap(wonOrLost, level):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                quit()
+                sys.exit(1)
 
         # display the map image on the game screen
         screen.blit(map_img, (0, -200))

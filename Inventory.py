@@ -1,6 +1,6 @@
 import pygame
 import button
-# import random
+import sys
 
 def loadAndScaleImg(imgName, itemNum):
     imgScale = 10
@@ -36,7 +36,7 @@ def gameInventory():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                quit()
+                sys.exit(1)
 
         screen.blit(inventory["item1"], (0, 0))
         screen.blit(inventory["item2"], (250, 0))

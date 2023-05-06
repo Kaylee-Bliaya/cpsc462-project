@@ -2,6 +2,7 @@ from mainMenu import *
 from map import *
 from Inventory import *
 from settings import *
+import sys
 
 os.chdir(RESOURCES_DIR)
 
@@ -28,6 +29,6 @@ def main():
             scene = SCENE_MAP
         if scene == "quit":
             pygame.quit()
-            quit()
+            sys.exit(1)
 
 main()
