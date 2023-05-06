@@ -1,4 +1,5 @@
 import pygame
+import button
 # import random
 
 def loadAndScaleImg(imgName, itemNum):
@@ -43,6 +44,13 @@ def gameInventory():
         screen.blit(inventory["item4"], (0, 270))
         screen.blit(inventory["item5"], (250, 270))
         screen.blit(inventory["item6"], (500, 270))
+
+        back_image = pygame.image.load('images/back.png').convert_alpha()
+        back_button = button.Button(back_image, 1000, 50)
+
+        if back_button.draw(screen):
+            return "map"
+
 
         pygame.display.update()
         clock.tick(60)
