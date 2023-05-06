@@ -35,8 +35,7 @@ def gameInventory():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit(1)
+                return "quit"
 
         screen.blit(inventory["item1"], (0, 0))
         screen.blit(inventory["item2"], (250, 0))
@@ -45,10 +44,10 @@ def gameInventory():
         screen.blit(inventory["item5"], (250, 270))
         screen.blit(inventory["item6"], (500, 270))
 
-        back_image = pygame.image.load('images/back.png').convert_alpha()
-        back_button = button.Button(back_image, 1000, 50, 1)
+        back_img = pygame.image.load('images/back.png').convert_alpha()
+        back_btn = button.Button(back_img, 1000, 50, 1)
 
-        if back_button.draw(screen):
+        if back_btn.draw(screen):
             return "map"
 
 

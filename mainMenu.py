@@ -120,8 +120,7 @@ def gameMenu(BEEN_TO_MAP):
         #event handler
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit(1)
+                return "quit"
             
             if event.type == pygame.KEYDOWN:
                 #press RETURN to go to the next step
