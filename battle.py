@@ -82,13 +82,6 @@ class Battle:
                 if event.key == pygame.K_w:
                     self.deploy_unit("left", "knight")
 
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit(1)
-
-
-        
-
     def update(self):
         now = pygame.time.get_ticks()
         self.all_sprites.update()
